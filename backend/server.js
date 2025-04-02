@@ -10,12 +10,12 @@ app.use(express.json());
 let pendingTransactions = {};
 let otpStore = {};
 
-// Send OTP via email (replace with real email credentials)
+
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: "sumit.gupta.srpg2211@gmail.com",
-        pass: "MasSRPG@sumit.gupta.srpg2211@22",
+        pass: "jhgl hmam bewr kbsm",
     },
 });
 
@@ -34,6 +34,12 @@ app.post("/check-transaction", (req, res) => {
             to: "gsumitg673@gmail.com",
             subject: "Your OTP for 2FA Transaction",
             text: `Your OTP is: ${otp}`,
+        }, (err, info) => {
+            if (err) {
+                console.error("Error sending email:", err);
+            } else {
+                console.log("Email sent:", info.response);
+            }
         });
 
         return res.json({ message: "2FA required. OTP sent to email." });
@@ -44,8 +50,8 @@ app.post("/check-transaction", (req, res) => {
 // OTP verification route
 app.post("/verify-otp", (req, res) => {
     const { sender, otp } = req.body;
-
-    if (otpStore[sender] && otpStore[sender] === otp) {
+    console.log(otpStore[sender])
+    if (otpStore[sender] == otp) {
         delete otpStore[sender];
         res.json({ success: true, transaction: pendingTransactions[sender] });
     } else {
