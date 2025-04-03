@@ -22,7 +22,7 @@ const TransactionForm = () => {
             await provider.send("eth_requestAccounts", []);
             const signer = provider.getSigner();
             const userAddress = await signer.getAddress();
-            setSender(userAddress); // Set sender address dynamically
+            setSender(userAddress); 
 
             
             const response = await axios.post("http://localhost:3000/check-transaction", {
