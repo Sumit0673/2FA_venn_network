@@ -21,5 +21,5 @@ class DetectionService:
                 self.trigger_alert(tx_triplet, risk_score)
 
     def trigger_alert(self, tx_triplet, risk_score):
-        # Implement alert logic here
-        pass
+        
+        
